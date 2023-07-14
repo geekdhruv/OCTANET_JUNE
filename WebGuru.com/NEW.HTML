@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Spam Detection</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #1a1a1a;
+      color: #fff;
+    }
+
+    header {
+      background-color: #333;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .form-section {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 200px;
+      resize: none;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #444;
+      background-color: #222;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    .button-container {
+      text-align: center;
+    }
+
+    button {
+      background-color: #555;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #777;
+    }
+
+    #resultSection {
+      margin-top: 40px;
+      background-color: #333;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    #resultMessage {
+      margin-top: 10px;
+    }
+
+    #resultMessage.success {
+      color: #00ff00;
+    }
+
+    #resultMessage.error {
+      color: #ff0000;
+    }
+
+    /* Media Queries */
+    @media screen and (max-width: 600px) {
+      textarea {
+        height: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Spam Detection</h1>
+  </header>
+  <main>
+    <section class="form-section">
+      <h2>Enter the text to check for spam:</h2>
+      <label for="textInput">Text:</label>
+      <textarea id="textInput" placeholder="Enter text here"></textarea>
+    </section>
+    <section class="button-container">
+      <button onclick="checkSpam()">Check Spam</button>
+    </section>
+    <section id="resultSection" style="display: none;">
+      <h2>Spam Detection Result:</h2>
+      <div id="resultMessage"></div>
+    </section>
+  </main>
+  <script>
+    function checkSpam() {
+      var textInput = document.getElementById("textInput");
+      var resultMessage = document.getElementById("resultMessage");
+      
+      var text = textInput.value;
+      var isSpam = detectSpam(text);
+      
+      if (isSpam) {
+        resultMessage.innerText = "This text is spam.";
+        resultMessage.className = "error";
+      } else {
+        resultMessage.innerText = "This text is not spam.";
+        resultMessage.className = "success";
+      }
+      
+      resultSection.style.display = "block";
+    }
+
+    function detectSpam(text) {
+      // Implement your spam detection logic here
+      // This is just a dummy example
+      var spamKeywords = ["buy now", "limited time offer", "free gift","Click here","Subscribe","Join"];
+      for (var i = 0; i < spamKeywords.length; i++) {
+        if (text.toLowerCase().includes(spamKeywords[i])) {
+          return true;
+        }
+      }
+      return false;
+    }
+  </script>
+</body>
+</html>
